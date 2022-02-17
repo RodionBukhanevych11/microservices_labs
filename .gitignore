@@ -1,1 +1,5 @@
 __pycache__
+*.odt
+*.pdf
+*.docx
+*.doc

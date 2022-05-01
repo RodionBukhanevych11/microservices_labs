@@ -51,10 +51,9 @@ class FacadeClient:
             return jsonify({"status_code": 500})
      
         
-facade_client = FacadeClient(FACADE_PORT, LOGGERS_PORTS, MESSAGE_PORT)
-
 
 if __name__ == '__main__':
+    facade_client = FacadeClient(FACADE_PORT, LOGGERS_PORTS, MESSAGE_PORT)
     facade_client.run_server()
     
     

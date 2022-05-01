@@ -1,5 +1,4 @@
-from utils import *
-
+from microservices.utils.utils import *
 
 class Logger:
     def __init__(self, port: str):

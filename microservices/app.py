@@ -1,6 +1,6 @@
 import requests
-from logging_manager import LoggingManager
-from utils import *
+from microservices.logging.logging_manager import LoggingManager
+from microservices.utils.utils import *
 
 if __name__ == '__main__':
     loggingManager = LoggingManager(LOGGERS_PORTS)

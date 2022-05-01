@@ -1,6 +1,6 @@
-from utils import *
-from messages_service import message_client
-from logging_service import Logger
+from microservices.utils.utils import *
+from microservices.message.messages_service import message_client
+from microservices.logging.logging_service import Logger
 
 
 class FacadeClient:

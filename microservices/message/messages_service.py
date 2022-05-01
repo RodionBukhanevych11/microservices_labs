@@ -1,4 +1,4 @@
-from utils import *
+from microservices.utils.utils import *
 
 
 message_client = Flask(__name__)

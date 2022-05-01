@@ -1,5 +1,5 @@
-from utils import *
-from logging_service import Logger
+from microservices.utils.utils import *
+from microservices.logging.logging_service import Logger
 
 
 class LoggingManager:

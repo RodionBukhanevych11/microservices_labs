@@ -4,3 +4,6 @@ __pycache__
 *.docx
 *.doc
 *.ipynb_checkpoints
+.eggs
+microservices.egg-info
+hazelcast-python-client-5.1.tar.gz

@@ -1,21 +1,20 @@
-Install requirements
 ```
-pip3 install -r requirements.txt
+pip3 install -e .
 ```
 
 To run facade service
 ```
-python3 facade_service.py
+python3 microservices/facade/facade_service.py
 ```
 To run message service
 ```
-python3 messages_service.py
+python3 microservices/message/messages_service.py
 ```
 To run loggers services
 ```
-python3 logging_manager.py
+python3 microservices/logging/logging_manager.py
 ```
 or run loggers with all requests and then shutdown n of them
 ```
-python3 app.py
+python3 microservices/app.py
 ```

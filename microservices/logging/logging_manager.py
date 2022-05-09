@@ -8,13 +8,13 @@ class LoggingManager:
         self.active_loggers = []
 
         
-    def run_loggers(self) -> NoReturn:
+    def run(self) -> NoReturn:
         for port in self.loggers_ports:
             logger = Logger(port)
             if logger.success:
                 self.active_loggers.append(logger)
        
-    def kill_loggers(self,n) -> NoReturn:
+    def kill(self,n) -> NoReturn:
         shutdown_loggers : List[Logger] = random.sample(self.active_loggers, 2)
         for logger in shutdown_loggers:
             logger.kill_thread()
@@ -22,4 +22,4 @@ class LoggingManager:
 
 if __name__ == '__main__':
     loggingManager = LoggingManager(LOGGERS_PORTS)
-    loggingManager.run_loggers()
+    loggingManager.run()

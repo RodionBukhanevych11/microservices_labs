@@ -8,7 +8,7 @@ python3 microservices/facade/facade_service.py
 ```
 To run message service
 ```
-python3 microservices/message/messages_service.py
+python3 microservices/message/messages_manager.py
 ```
 To run loggers services
 ```

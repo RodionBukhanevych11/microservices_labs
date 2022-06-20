@@ -1,3 +1,4 @@
 Flask
 hazelcast-python-client
 pika
+python-consul

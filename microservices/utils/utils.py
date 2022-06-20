@@ -10,12 +10,6 @@ from flask import Flask, request, jsonify
 import threading, queue
 import pika
 
-FACADE_PORT = "8081"
-LOGGERS_PORTS = ["8082","8083","8084"]
-MESSAGERS_PORTS = ["8085","8086"]
-MESSAGE_BROKER_PORT = "5672"
-QUEUE_NAME = "mes_box"
-
 
 class Message:
     _counter = 0
@@ -52,18 +46,19 @@ class FlaskThread(threading.Thread):
     
     
 class MessagerThread(threading.Thread):
-    def __init__(self, port : str, queue_name : str, messages_list : List):
+    def __init__(self, host: str, port : str, queue_name : str, messages_list : List):
         super(MessagerThread, self).__init__()
         self._is_interrupted = False
+        self._host = host
         self._port = port
         self._queue_name = queue_name
-        self.messages_list = messages_list
+        self._messages_list = messages_list
 
     def stop(self):
         self._is_interrupted = True
 
     def run(self):
-        connection_parameters = pika.ConnectionParameters(host = '0.0.0.0', 
+        connection_parameters = pika.ConnectionParameters(host = self._host, 
                                                           port = self._port
                                                           )
         connection = pika.BlockingConnection()
@@ -77,5 +72,5 @@ class MessagerThread(threading.Thread):
                 continue
             method, properties, body = message
             if body is not None:
-                self.messages_list.append(body.decode("utf-8"))
+                self._messages_list.append(body.decode("utf-8"))
 

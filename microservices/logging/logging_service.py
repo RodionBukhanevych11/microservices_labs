@@ -1,21 +1,33 @@
-from microservices.utils.utils import *
+import flask
+import requests
+import random
+from urllib import request
+import hazelcast
+import time
+import os,sys
+from typing import List, Dict, NoReturn
+from flask import Flask, request, jsonify
+from microservices.utils.utils import FlaskThread
+import microservices.utils.consul_utils as cf
+
 
 class Logger:
     def __init__(self, port: str):
         self._logging_client = Flask(__name__)
         self._logging_client.add_url_rule('/log',view_func=self.post_log, methods = ["POST"])
         self._logging_client.add_url_rule('/log',view_func=self.get_log, methods = ["GET"])
-        self._port = port
-        self.thread = None
+        self._port = str(port)
+        self._host = str(cf.get_kv("host")['value'])
         self.success = self.run_server()
         if self.success:
             self.run_client()
+            cf.register_service(name="logging-service", host=self._host, port=int(self._port), service_id=f'logging_{self._port}')
         
 
     def run_server(self) -> bool:
         try:
             self.thread = FlaskThread(target=lambda: self._logging_client.run(
-                debug  = False, host = '0.0.0.0', port = self._port, use_reloader = False
+                debug  = False, host = self._host, port = self._port, use_reloader = False
             ))
             self.thread.start()
             return True
